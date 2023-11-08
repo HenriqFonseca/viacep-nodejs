@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Endereço</title>
+  </head>
+  <body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+      .navbar a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      .form-group {
+        margin: 10px 0;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="navbar">
+      <a href="/">Adicionar endereço</a>
+      <a href="/endereco">Meus endereços</a>
+    </div>
+    <div class="container">
+      <h1>Adicionar Endereço</h1>
+      <form action="/cadastrar" method="POST">
+        <div class="form-group">
+          <label for="cep">Nome:</label>
+          <input type="text" id="nome" name="nome" />
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input type="text" id="cep" name="cep" maxlength="9" />
+        </div>
+        <div class="form-group">
+          <label for="logradouro">Logradouro:</label>
+          <input type="text" id="logradouro" name="logradouro" />
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro:</label>
+          <input type="text" id="bairro" name="bairro" />
+        </div>
+        <div class="form-group">
+          <label for="localidade">Localidade:</label>
+          <input type="text" id="localidade" name="localidade" />
+        </div>
+        <div class="form-group">
+          <label for="uf">UF:</label>
+          <input type="text" id="uf" name="uf" />
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <input type="text" id="descricao" name="descricao" />
+        </div>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+
+    <script>
+      const cep = document.querySelector("#cep");
+
+      const showData = (result) => {
+        for (const campo in result) {
+          if (document.querySelector("#" + campo)) {
+            document.querySelector("#" + campo).value = result[campo];
+          }
+        }
+      };
+
+      cep.addEventListener("blur", (e) => {
+        let search = cep.value.replace("-", "");
+        const options = {
+          method: "GET",
+          mode: "cors",
+          cache: "default",
+        };
+
+        fetch(`https://viacep.com.br/ws/${search}/json/`, options)
+          .then((res) => {
+            res.json().then((data) => showData(data));
+          })
+          .catch((error) => console.log("Deu erro:" + error.message));
+      });
+    </script>
+  </body>
+</html>

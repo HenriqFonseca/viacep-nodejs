@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 const app = express()
 
 const handlebars = require("express-handlebars").engine
@@ -10,6 +11,7 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app')
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
@@ -31,7 +33,7 @@ app.get("/", function(req, res){
 })
 
 
-app.get("/endereco", async function(req, res){
+app.get("/enderecos", async function(req, res){
   let enderecos =[]
   const snapshot= await Endereco.get()
   snapshot.forEach((doc) => {
@@ -61,7 +63,7 @@ app.get("/editar/:id", function(req, res){
 app.get("/excluir/:id", async function(req, res){
   let id = req.params.id;
   const result = await Endereco.doc(id).delete()
-  res.redirect("/")
+  res.redirect("/enderecos")
 })
 
 app.post("/cadastrar", function(req, res){

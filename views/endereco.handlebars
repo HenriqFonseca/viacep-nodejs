@@ -3,107 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Meus Endereços</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-        }
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .address-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .address-card h2 {
-            font-size: 20px;
-        }
-        .address-card p {
-            font-size: 14px;
-        }
-
-        .btn{
-            padding: 9px;
-            border: none;
-            border-radius: 3px;
-            background-color: white;
-            color: white;
-            outline-offset: 0;
-        }
-        .btn>a{
-            text-decoration: none;
-
-        }
-
-        .btn-editar{
-            background-color: rgb(48, 84, 202);
-        }
-        .btn-excluir{
-            background-color: rgb(202, 48, 48);
-        }
-
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="navbar">
         <a href="/">Adicionar endereço</a>
-        <a href="/endereco">Meus endereços</a>
+        <a href="/enderecos">Meus endereços</a>
     </div>
     <div class="container">
         <h1>Meus Endereços</h1>
-        <div class="address-card">
-            <h2>Título do Endereço 1</h2>
-            <p>Descrição: Descrição do Endereço 1</p>
-            <p>CEP: 12345-678</p>
-            <p>Logradouro: Rua Exemplo, 123</p>
-            <p>Bairro: Bairro Exemplo</p>
-            <p>Localidade: Cidade Exemplo</p>
-            <p>UF: EX</p>
-        </div>
-        <div class="address-card">
-            <h2>Título do Endereço 2</h2>
-            <p>Descrição: Descrição do Endereço 2</p>
-            <p>CEP: 98765-432</p>
-            <p>Logradouro: Avenida Teste, 456</p>
-            <p>Bairro: Bairro de Teste</p>
-            <p>Localidade: Cidade de Teste</p>
-            <p>UF: TS</p>
-        </div>
-        {{#each post}}
-        <div class="address-card">
-            <h2>{{nome}}</h2>
-            <p>{{descricao}}</p>
-            <p>{{logradouro}}</p>
-            <p>{{bairro}}</p>
-            <p>{{localidade}} - {{uf}}</p>
-            <p>{{cep}}</p>
-            <div class="col">
-                <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
-                <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+        {{#if post.[0]}}
+            {{#each post}}
+            <div class="address-card">
+                <h2>{{nome}}</h2>
+                <p>{{descricao}}</p>
+                <p>{{logradouro}}</p>
+                <p>{{bairro}}</p>
+                <p>{{localidade}} - {{uf}}</p>
+                <p>{{cep}}</p>
+                <div class="col">
+                    <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
+                    <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+                </div>
             </div>
-        </div>
-        {{/each}}
+            {{/each}}
+            {{else}}
+            <p class="no-address">Nenhum endereço cadastrado</p>
+        {{/if}}
     </div>
 </body>
 </html>

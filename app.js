@@ -24,6 +24,28 @@ initializeApp({
 const db = getFirestore()
 const Endereco = db.collection("Enderecos")
 
+const multer = require('multer');
+
+// Configuração de armazenamento
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+      // Extração da extensão do arquivo original:
+      const extensaoArquivo = file.originalname.split('.')[1];
+
+      // Cria um código randômico que será o nome do arquivo
+      const novoNomeArquivo = require('crypto')
+          .randomBytes(64)
+          .toString('hex');
+
+      // Indica o novo nome do arquivo:
+      cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
+  }
+});
+
+const upload = multer({ storage });
 
 //* Rendezirar primeira página
 app.get("/", function(req, res){
@@ -66,7 +88,7 @@ app.get("/excluir/:id", async function(req, res){
   res.redirect("/enderecos")
 })
 
-app.post("/cadastrar", function(req, res){
+app.post("/cadastrar", upload.single('imagem'), function(req, res){
   var result = Endereco.add({
     nome: req.body.nome,
     cep: req.body.cep,
@@ -74,10 +96,13 @@ app.post("/cadastrar", function(req, res){
     bairro: req.body.bairro,
     localidade: req.body.localidade,
     uf: req.body.uf,
-    descricao: req.body.descricao
+    numero: req.body.numero,
+    descricao: req.body.descricao,
+    imagePath: req.file.filename
   }).then(function(){
       console.log('Added document')
-      res.redirect('/')
+      console.log(req.file.filename)
+      res.redirect('/enderecos')
   })
 })
 

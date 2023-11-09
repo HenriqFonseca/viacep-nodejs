@@ -23,6 +23,14 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+.card-container {
+ display: flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+}
+
+
+
 .form-group {
   margin: 10px 0;
 }
@@ -48,10 +56,25 @@ button {
 
 .address-card {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
   margin: 10px 0;
+  max-width: 360px;
+  box-shadow: 10px 10px 23px -11px rgba(0,0,0,0.25);
+-webkit-box-shadow: 10px 10px 23px -11px rgba(0,0,0,0.25);
+-moz-box-shadow: 10px 10px 23px -11px rgba(0,0,0,0.25);
 }
+
+.address-title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.address-image>img{
+  width: 100%;
+  max-width: 400px;
+}
+
 .address-card h2 {
   font-size: 20px;
 }
@@ -80,4 +103,33 @@ button {
 
 .no-address {
   color: #999;
+}
+
+
+
+/* Rating CSS */
+.avaliacao{
+  display: flex;
+  margin: 0;
+  padding: 0 !important;
+ }
+
+.star-icon{
+  list-style-type: none;
+  border: 1px solid #fff;
+  cursor: pointer;
+  color: #ffe500;
+  font-size: 30px;/* alterar o tamanho das estrelas */
+}
+.star-icon::before{
+  content: "\2605";
+}
+.star-icon.ativo ~ .star-icon::before{
+  content: "\2606";
+}
+.avaliacao:hover .star-icon::before{
+  content: "\2605";
+}
+.star-icon:hover ~ .star-icon::before{
+  content: "\2606";
 }

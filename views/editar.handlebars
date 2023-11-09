@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Endereço</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/">Adicionar endereço</a>
+      <a href="/enderecos">Meus endereços</a>
+    </div>
+    <div class="container">
+      <h1>Adicionar Endereço</h1>
+      <form action="/atualizar" method="POST">
+        <div class="form-group">
+          <label for="cep">Nome:</label>
+          <input type="hidden" id="id" name="id" value="{{id}}"/>
+          <input type="text" id="nome" name="nome" value="{{dados.nome}}"/>
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input type="text" id="cep" name="cep" maxlength="9" value="{{dados.cep}}"/>
+        </div>
+        <div class="form-group">
+          <label for="logradouro">Logradouro:</label>
+          <input type="text" id="logradouro" name="logradouro" value="{{dados.logradouro}}"/>
+        </div>
+        <div class="form-group">
+          <label for="bairro">Bairro:</label>
+          <input type="text" id="bairro" name="bairro" value="{{dados.bairro}}"/>
+        </div>
+        <div class="form-group">
+          <label for="localidade">Localidade:</label>
+          <input type="text" id="localidade" name="localidade" value="{{dados.localidade}}"/>
+        </div>
+        <div class="form-group">
+          <label for="uf">UF:</label>
+          <input type="text" id="uf" name="uf" value="{{dados.uf}}"/>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <input type="text" id="descricao" name="descricao" value="{{dados.decricao}}"/>
+        </div>
+        <button type="submit">Editar</button>
+      </form>
+    </div>
+
+    <script>
+      const cep = document.querySelector("#cep");
+
+      const showData = (result) => {
+        for (const campo in result) {
+          if (document.querySelector("#" + campo)) {
+            document.querySelector("#" + campo).value = result[campo];
+          }
+        }
+      };
+
+      cep.addEventListener("blur", (e) => {
+        let search = cep.value.replace("-", "");
+        const options = {
+          method: "GET",
+          mode: "cors",
+          cache: "default",
+        };
+
+        fetch(`https://viacep.com.br/ws/${search}/json/`, options)
+          .then((res) => {
+            res.json().then((data) => showData(data));
+          })
+          .catch((error) => console.log("Deu erro:" + error.message));
+      });
+    </script>
+  </body>
+</html>

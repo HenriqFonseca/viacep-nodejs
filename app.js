@@ -54,7 +54,7 @@ app.get("/editar/:id", function(req, res){
           }
       })
       .catch((error) => {
-          console.error("Erro ao buscar agendamento para edição: ", error)
+          console.error("Erro ao buscar endereço para edição: ", error)
       });
 })
 
@@ -85,11 +85,13 @@ app.post("/atualizar", function(req, res){
   var id = req.body.id;
 
   var result= Endereco.doc(id).update({
-      nome: req.body.nome,
-      telefone: req.body.telefone,
-      origem: req.body.origem,
-      data_contato: req.body.data_contato,
-      observacao: req.body.observacao
+    nome: req.body.nome,
+    cep: req.body.cep,
+    logradouro: req.body.logradouro,
+    bairro: req.body.bairro,
+    localidade: req.body.localidade,
+    uf: req.body.uf,
+    descricao: req.body.descricao
   }).then(function(){
       console.log('Atualizado com sucesso')
       res.redirect('/')

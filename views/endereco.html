@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Endereços</title>
+    <link rel="stylesheet" href="/public/assets/css/style.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Adicionar endereço</a>
+        <a href="/enderecos">Meus endereços</a>
+    </div>
+    <div class="container">
+        <h1>Meus Endereços</h1>
+        <div class="card-container">
+
+            <div class="address-card">
+                <div class="address-title">
+                    <h2>Titulo Lugar</h2>
+                    <div class="address-rating">
+                        <ul class="avaliacao">
+                            <li class="star-icon ativo" data-avaliacao="1"></li>
+                            <li class="star-icon" data-avaliacao="2"></li>
+                            <li class="star-icon" data-avaliacao="3"></li>
+                            <li class="star-icon" data-avaliacao="4"></li>
+                            <li class="star-icon" data-avaliacao="5"></li>
+                          </ul>
+                    </div>
+                </div>
+                <div class="address-image">
+                    <img src="/public/img/Captura de tela 2023-11-01 183301.png" alt="" srcset="">
+                </div>
+                <div class="address-body">
+                    <p>bom restaurante  </p>
+                    <p>rua mt loca  -  numero 1129</p>
+                    <p>São Paulo - SP</p>
+                    <p>08843030</p>
+                    <div class="col">
+                        <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
+                        <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+                    </div>
+                </div>
+                
+                    
+            </div><div class="address-card">
+                <div class="address-title">
+                    <h2>Titulo Lugar</h2>
+                    <div class="address-rating">
+                        <ul class="avaliacao">
+                            <li class="star-icon ativo" data-avaliacao="1"></li>
+                            <li class="star-icon" data-avaliacao="2"></li>
+                            <li class="star-icon" data-avaliacao="3"></li>
+                            <li class="star-icon" data-avaliacao="4"></li>
+                            <li class="star-icon" data-avaliacao="5"></li>
+                          </ul>
+                    </div>
+                </div>
+                <div class="address-image">
+                    <img src="/public/img/Captura de tela 2023-11-01 183301.png" alt="" srcset="">
+                </div>
+                <div class="address-body">
+                    <p>bom restaurante  </p>
+                    <p>rua mt loca  -  numero 1129</p>
+                    <p>São Paulo - SP</p>
+                    <p>08843030</p>
+                    <div class="col">
+                        <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
+                        <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+                    </div>
+                </div>
+                
+                    
+            </div><div class="address-card">
+                <div class="address-title">
+                    <h2>Titulo Lugar</h2>
+                    <div class="address-rating">
+                        <ul class="avaliacao">
+                            <li class="star-icon ativo" data-avaliacao="1"></li>
+                            <li class="star-icon" data-avaliacao="2"></li>
+                            <li class="star-icon" data-avaliacao="3"></li>
+                            <li class="star-icon" data-avaliacao="4"></li>
+                            <li class="star-icon" data-avaliacao="5"></li>
+                          </ul>
+                    </div>
+                </div>
+                <div class="address-image">
+                    <img src="/public/img/Captura de tela 2023-11-01 183301.png" alt="" srcset="">
+                </div>
+                <div class="address-body">
+                    <p>bom restaurante  </p>
+                    <p>rua mt loca  -  numero 1129</p>
+                    <p>São Paulo - SP</p>
+                    <p>08843030</p>
+                    <div class="col">
+                        <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
+                        <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+                    </div>
+                </div>
+                
+                    
+            </div>
+        
+        
+    </div>
+
+        <!-- {{#if post.[0]}}
+            {{#each post}}
+            <div class="address-card">
+                <h2>{{nome}}</h2>
+                <p>{{descricao}}</p>
+                <p>{{logradouro}}</p>
+                <p>{{bairro}}</p>
+                <p>{{localidade}} - {{uf}}</p>
+                <p>{{cep}}</p>
+                <div class="col">
+                    <button class="btn btn-editar" type="button" class="btn btn-primary"><a href="/editar/{{id}}" style="color:inherit">Editar</a></button>
+                    <button class="btn btn-excluir" type="button" class="btn btn-primary"><a href="/excluir/{{id}}" style="color:inherit">Excluir</a></button>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
+            <p class="no-address">Nenhum endereço cadastrado</p>
+        {{/if}} -->
+    </div>
+</body>
+</html>

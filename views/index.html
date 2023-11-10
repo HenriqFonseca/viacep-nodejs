@@ -52,12 +52,41 @@
           <label for="imagem">Imagem:</label>
           <input type="file" id="imagem" name="imagem">
         </div>
+        <div class="form-group">
+          <label>Avaliação:</label>
+          <div class="rating-stars">
+            <i class="bi bi-star star" data-star="1"></i>
+            <i class="bi bi-star star" data-star="2"></i>
+            <i class="bi bi-star star" data-star="3"></i>
+            <i class="bi bi-star star" data-star="4"></i>
+            <i class="bi bi-star star" data-star="5"></i>
+            <input type="hidden" name="rating" value="0" id="rating">
+          </div>
+        </div>
         
         
         <button type="submit">Cadastrar</button>
       </form>
     </div>
 
+    <script>
+      const stars = document.querySelectorAll(".star");
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          let rating = star.getAttribute("data-star");
+          let ratingInput = document.querySelector("#rating")
+          ratingInput.value = rating;
+          for(let i = 1; i <= 5; i++){
+            let thisStar = document.querySelector(`[data-star="${i}"]`);
+            if(i <= rating) {
+              thisStar.classList.replace("bi-star", "bi-star-fill")
+            } else {
+              thisStar.classList.replace( "bi-star-fill", "bi-star")
+            }
+          }
+        })
+      })
+    </script>
     <script>
       const cep = document.querySelector("#cep");
 
@@ -69,7 +98,7 @@
         }
       };
 
-      cep.addEventListener("blur", (e) => {
+      cep.addEventListener("input", (e) => {
         let search = cep.value.replace("-", "");
         const options = {
           method: "GET",

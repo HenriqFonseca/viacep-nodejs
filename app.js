@@ -98,10 +98,10 @@ app.post("/cadastrar", upload.single('imagem'), function(req, res){
     uf: req.body.uf,
     numero: req.body.numero,
     descricao: req.body.descricao,
-    imagePath: req.file.filename
+    imagePath: req.file.filename, 
+    rating: req.body.rating
   }).then(function(){
       console.log('Added document')
-      console.log(req.file.filename)
       res.redirect('/enderecos')
   })
 })
@@ -115,7 +115,8 @@ app.post("/atualizar", function(req, res){
       origem: req.body.origem,
       numero: req.body.numero,
       data_contato: req.body.data_contato,
-      observacao: req.body.observacao
+      observacao: req.body.observacao,
+      rating: req.body.rating
   }).then(function(){
       console.log('Atualizado com sucesso')
       res.redirect('/')

@@ -14,7 +14,7 @@
     </div>
     <div class="container">
       <h1>Adicionar Endereço</h1>
-      <form action="/atualizar" method="POST">
+      <form action="/atualizar" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="cep">Nome:</label>
           <input type="hidden" id="id" name="id" value="{{id}}"/>
@@ -55,6 +55,12 @@
             <input type="hidden" name="rating" value="{{dados.rating}}" id="rating">
           </div>
         </div>
+        <div class="form-group">
+          <label for="imagem">Imagem:</label>
+          <input type="hidden" value="{{dados.imagePath}}" name="oldImage">
+          <img src="/uploads/{{dados.imagePath}}"  class="address-image-edit" id="preview-image">
+          <input type="file" id="imagem" name="imagem" onchange="previewFile()">
+        </div>
         <button type="submit">Editar</button>
       </form>
     </div>
@@ -64,6 +70,22 @@
 
 
     <script>
+      function previewFile() {
+        var preview = document.querySelector('#preview-image');
+        var file    = document.querySelector('#imagem').files[0];
+        var reader  = new FileReader();
+
+        reader.onloadend = function () {
+          preview.src = reader.result;
+        }
+
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = "";
+        }
+      }
+
       const showStars = (rating) => {
         for(let i = 1; i <= 5; i++){
             let thisStar = document.querySelector(`[data-star="${i}"]`);

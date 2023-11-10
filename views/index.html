@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Endereço</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   </head>
   <body>
     <div class="navbar">
@@ -50,7 +51,8 @@
         </div>
         <div class="form-group">
           <label for="imagem">Imagem:</label>
-          <input type="file" id="imagem" name="imagem" >
+          <img style="display: none" class="address-image-edit" id="preview-image">
+          <input type="file" id="imagem" name="imagem" onchange="previewFile()">
         </div>
         <div class="form-group">
           <label>Avaliação:</label>
@@ -65,11 +67,30 @@
         </div>
         
         
-        <button type="submit">Cadastrar</button>
+        <button id="botao" type="submit">Cadastrar</button>
       </form>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <script>
+      function previewFile() {
+        var preview = document.querySelector('#preview-image');
+        var file    = document.querySelector('#imagem').files[0];
+        var reader  = new FileReader();
+
+        reader.onloadend = function () {
+          preview.src = reader.result;
+        }
+
+        if (file) {
+          reader.readAsDataURL(file);
+          preview.style.display="inherit";
+        } else {
+          preview.src = "";
+        }
+      }
+
       const showStars = (rating) => {
         for(let i = 1; i <= 5; i++){
             let thisStar = document.querySelector(`[data-star="${i}"]`);
@@ -102,6 +123,15 @@
         }
       };
 
+      const setDisabled = (state) => {
+        const inputs = ["#logradouro", "#bairro", "#localidade", "#uf"]
+
+        for (input of inputs){
+          input = document.querySelector(input)
+          input.disabled = state;
+        }
+      }
+
       cep.addEventListener("input", (e) => {
         let search = cep.value.replace("-", "");
         const options = {
@@ -110,11 +140,30 @@
           cache: "default",
         };
 
+        setDisabled(true)
         fetch(`https://viacep.com.br/ws/${search}/json/`, options)
-          .then((res) => {
-            res.json().then((data) => showData(data));
-          })
-          .catch((error) => console.log("Deu erro:" + error.message));
+        .then((res) => {
+          return res.json()
+        }).then((data) => {
+          if(data.erro){
+            Toastify({
+            text: "CEP inválido",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(90deg, rgba(180,58,58,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+          } else {
+            setDisabled(false)
+            showData(data);
+            element.classList.remove("cep-invalid");
+          }
+        })
       });
     </script>
   </body>

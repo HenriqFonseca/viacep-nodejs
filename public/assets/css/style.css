@@ -47,6 +47,11 @@ input, textarea {
   box-sizing: border-box;
   resize: vertical;
 }
+
+.cep-invalid{
+  border: 1px solid red;
+}
+
 button {
   background-color: #333;
   color: #fff;
@@ -131,4 +136,13 @@ button {
 
 .rating-stars .star:is(.bi-star-fill){
   color: rgb(255, 200, 0);
+}
+
+.address-image-edit {
+  width: 100%;
+  object-fit: cover;
+}
+
+.address-image img {
+  object-fit: cover;
 }

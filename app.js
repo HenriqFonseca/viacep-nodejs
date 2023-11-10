@@ -98,7 +98,7 @@ app.post("/cadastrar", upload.single('imagem'), function(req, res){
     uf: req.body.uf,
     numero: req.body.numero,
     descricao: req.body.descricao,
-    imagePath: req.file.filename, 
+    imagePath: req.file && req.file.filename || "", 
     rating: req.body.rating
   }).then(function(){
       console.log('Added document')

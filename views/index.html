@@ -17,36 +17,36 @@
       <form action="/cadastrar" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="cep">Nome:</label>
-          <input type="text" id="nome" name="nome" />
+          <input type="text" id="nome" name="nome" required />
         </div>
         <div class="form-group">
           <label for="cep">CEP:</label>
-          <input type="text" id="cep" name="cep" maxlength="9" />
+          <input type="text" id="cep" name="cep" maxlength="9" required />
         </div>
         <div class="form-group">
           <label for="logradouro">Logradouro:</label>
-          <input type="text" id="logradouro" name="logradouro" />
+          <input type="text" id="logradouro" name="logradouro" required />
         </div>
         <div class="form-group">
           <label for="bairro">Bairro:</label>
-          <input type="text" id="bairro" name="bairro" />
+          <input type="text" id="bairro" name="bairro" required />
         </div>
         <div class="form-group">
           <label for="numero">Número:</label>
-          <input type="number" id="numero" name="numero" />
+          <input type="number" id="numero" name="numero" required />
         </div>
 
         <div class="form-group">
           <label for="localidade">Cidade:</label>
-          <input type="text" id="localidade" name="localidade" />
+          <input type="text" id="localidade" name="localidade" required />
         </div>
         <div class="form-group">
           <label for="uf">UF:</label>
-          <input type="text" id="uf" name="uf" />
+          <input type="text" id="uf" name="uf" required />
         </div>
         <div class="form-group">
           <label for="descricao">Descrição:</label>
-          <textarea type="text" id="descricao" name="descricao" class="form-control"></textarea>
+          <textarea type="text" id="descricao" name="descricao" class="form-control" required></textarea>
         </div>
         <div class="form-group">
           <label for="imagem">Imagem:</label>
@@ -60,7 +60,7 @@
             <i class="bi bi-star star" data-star="3"></i>
             <i class="bi bi-star star" data-star="4"></i>
             <i class="bi bi-star star" data-star="5"></i>
-            <input type="hidden" name="rating" value="0" id="rating">
+            <input type="hidden" name="rating" value="" id="rating">
           </div>
         </div>
         
@@ -70,13 +70,8 @@
     </div>
 
     <script>
-      const stars = document.querySelectorAll(".star");
-      stars.forEach((star) => {
-        star.addEventListener("click", () => {
-          let rating = star.getAttribute("data-star");
-          let ratingInput = document.querySelector("#rating")
-          ratingInput.value = rating;
-          for(let i = 1; i <= 5; i++){
+      const showStars = (rating) => {
+        for(let i = 1; i <= 5; i++){
             let thisStar = document.querySelector(`[data-star="${i}"]`);
             if(i <= rating) {
               thisStar.classList.replace("bi-star", "bi-star-fill")
@@ -84,6 +79,15 @@
               thisStar.classList.replace( "bi-star-fill", "bi-star")
             }
           }
+      }
+
+      const stars = document.querySelectorAll(".star");
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          let rating = star.getAttribute("data-star");
+          let ratingInput = document.querySelector("#rating")
+          ratingInput.value = rating;
+          showStars(rating);
         })
       })
     </script>

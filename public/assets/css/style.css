@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
@@ -28,7 +29,6 @@ body {
  justify-content: space-between;
  flex-wrap: wrap;
 }
-
 
 
 .form-group {
@@ -85,7 +85,7 @@ button {
 }
 
 .btn{
-  padding: 9px;
+  padding: 9px 14px;
   border: none;
   border-radius: 3px;
   background-color: white;
@@ -107,31 +107,26 @@ button {
   color: #999;
 }
 
-
-
-/* Rating CSS */
-.avaliacao{
+.rating-stars {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
   display: flex;
-  margin: 0;
-  padding: 0 !important;
- }
+  gap: 5px;
+}
 
-.star-icon{
-  list-style-type: none;
-  border: 1px solid #fff;
+.rating-stars .star {
   cursor: pointer;
-  color: #ffe500;
-  font-size: 30px;/* alterar o tamanho das estrelas */
+  font-size: 1.2rem;
+  user-select: none;
+  display: grid;
+  place-items: center;
+  color: #ccc;
 }
-.star-icon::before{
-  content: "\2605";
-}
-.star-icon.ativo ~ .star-icon::before{
-  content: "\2606";
-}
-.avaliacao:hover .star-icon::before{
-  content: "\2605";
-}
-.star-icon:hover ~ .star-icon::before{
-  content: "\2606";
+
+.rating-stars .star:is(.bi-star-fill){
+  color: rgb(255, 200, 0);
 }
